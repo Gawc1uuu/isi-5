@@ -1,17 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const navigate = useNavigate()
   const handleRedirect = async () => {
-    try {
-      window.location.href =
-        'https://b93b-94-254-130-39.ngrok-free.app/api/login';
-    } catch (e) {
-      console.error('error', e);
+    try{
+      navigate("/add")
+    }catch(err:any){
+      console.log(err)
     }
   };
 
   return (
     <div>
-      <div>Click button to redirect to /callback</div>
-      <button onClick={() => handleRedirect()}>redirect</button>
+      <div>Click button to login</div>
+      <button onClick={() => handleRedirect()}>login</button>
     </div>
   );
 };

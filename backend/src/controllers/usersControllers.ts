@@ -14,30 +14,30 @@ export const addWallet = async (
   const { walletAddress, userId: twitterId } = req.body;
 
   console.log('im here');
-  if (!walletAddress || !/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
-    return res.status(400).json({ error: 'Invalid wallet address' });
-  }
 
   try {
-    // const user = req.user;
-    // if(!user){
-    //   res.status(403).json({message:"unathorized"})
-    // }
+    console.log('im here');
 
     const [existingWallet] = await db
       .select()
       .from(walletsTable)
       .where(eq(walletsTable.walletAddress, walletAddress));
 
+      console.log('im here');
+
     if (existingWallet) {
       res.status(400).json({ message: 'wallet already submitted' });
       return;
     }
 
+    console.log('im here');
+
     await db.insert(walletsTable).values({
       walletAddress,
       twitterId,
     });
+
+    console.log('im here');
 
     return res.status(200).json({ message: 'inserted correctly' });
   } catch (err: any) {
